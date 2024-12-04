@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             version="2.2">
+
+    <persistence-unit name="default">
+        <jta-data-source>java:/PostGreDS</jta-data-source>
+        <class>com.spo.workerService.entity.Person</class>
+        <class>com.spo.workerService.entity.Coordinates</class>
+        <class>com.spo.workerService.entity.Location</class>
+        <class>com.spo.workerService.entity.Worker</class>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/poouo"/>
+            <property name="jakarta.persistence.jdbc.user" value="poouo"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.schema-generation.database.action" value="update"/>
+        </properties>
+
+    </persistence-unit>
+</persistence>
