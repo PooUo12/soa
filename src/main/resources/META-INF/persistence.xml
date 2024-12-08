@@ -13,6 +13,9 @@
              <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/poouo"/>
             <property name="jakarta.persistence.jdbc.user" value="poouo"/>
             <property name="jakarta.persistence.jdbc.password" value=""/>
+<!--                         <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://pg/studs"/>-->
+<!--                        <property name="jakarta.persistence.jdbc.user" value="s335055"/>-->
+<!--                        <property name="jakarta.persistence.jdbc.password" value="k2BYRi6jo05wg313"/>-->
             <property name="javax.persistence.schema-generation.database.action" value="update"/>
         </properties>
 

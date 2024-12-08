@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
@@ -78,6 +79,7 @@ public class WorkerParser {
 
         try {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S'Z'");
+            df.setTimeZone(TimeZone.getTimeZone(ZoneId.of("Europe/London")));
             date = df.parse(worker.getStartDate());
         } catch (ParseException e) {
             errors.add("Illegal Start-date format. It should be yyyy-MM-dd'T'HH:mm:ss.S'Z'");
@@ -87,11 +89,13 @@ public class WorkerParser {
             if (salary < 1) {
                 errors.add("Salary can not be less then 1");
             }
+        } catch (NumberFormatException e) {
+            errors.add("Salary can not be string");
+        }
+        try {
             if (worker.getStatus() != null) {
                 status = Status.valueOf(worker.getStatus().toUpperCase());
             }
-        } catch (NumberFormatException e) {
-            errors.add("Salary can not be string");
         } catch (IllegalArgumentException e) {
             errors.add("Illegal status");
         }
@@ -214,23 +218,28 @@ public class WorkerParser {
         }
         try {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S'Z'");
+            df.setTimeZone(TimeZone.getTimeZone(ZoneId.of("Europe/London")));
             date = df.parse(worker.getStartDate());
         } catch (ParseException e) {
             errors.add("Illegal Start-date format. It should be yyyy-MM-dd'T'HH:mm:ss.S'Z'");
         }
         try {
             creationDate = LocalDate.parse(worker.getCreationDate());
+        } catch (DateTimeParseException e) {
+            errors.add("Illegal Creation-date format. It should be yyyy-MM-dd");
+        }
+        try {
             salary = Integer.valueOf(worker.getSalary());
             if (salary < 1) {
                 errors.add("Salary can not be less then 1");
             }
+        } catch (NumberFormatException e) {
+            errors.add("Salary can not be string");
+        }
+        try {
             if (worker.getStatus() != null) {
                 status = Status.valueOf(worker.getStatus().toUpperCase());
             }
-        } catch (DateTimeParseException e) {
-            errors.add("Illegal Creation-date format. It should be yyyy-MM-dd");
-        } catch (NumberFormatException e) {
-            errors.add("Salary can not be string");
         } catch (IllegalArgumentException e) {
             errors.add("Illegal status");
         }

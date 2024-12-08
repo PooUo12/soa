@@ -15,6 +15,9 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.hibernate.exception.ConstraintViolationException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.*;
 
 
@@ -33,6 +36,7 @@ public class WorkerRepository {
         TypedQuery<Worker> psqlQuery;
         var errors = new ArrayList<>();
         var out = new ArrayList<>();
+        boolean nextPage = false;
 
         String query = getQuery(getRequest);
         log.info(query);
@@ -51,6 +55,7 @@ public class WorkerRepository {
             out.add(psqlQuery.getResultList().subList(getRequest.getPageOffset(), psqlQuery.getResultList().size()));
         } else if (getRequest.getPageSize() != 0) {
             out.add(psqlQuery.getResultList().subList(getRequest.getPageOffset(), getRequest.getPageOffset() + getRequest.getPageSize()));
+            nextPage = true;
         } else if (getRequest.getPageOffset() != 0) {
             out.add(psqlQuery.getResultList().subList(getRequest.getPageOffset(), psqlQuery.getResultList().size()));
         } else {
@@ -58,6 +63,7 @@ public class WorkerRepository {
         }
         out.add(null);
         out.add(200);
+        out.add(nextPage);
         return out;
     }
 
@@ -164,7 +170,11 @@ public class WorkerRepository {
             out.add(500);
             return out;
         }
-        out.add(psqlQuery.getResultList());
+        if (psqlQuery.getResultList() == null){
+            out.add(0);
+        } else {
+            out.add(psqlQuery.getResultList());
+        }
         out.add(null);
         out.add(200);
         return out;

@@ -13,9 +13,7 @@ import jakarta.ws.rs.core.Response;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Path("api/workers")
 @Produces(MediaType.APPLICATION_JSON)
@@ -100,6 +98,17 @@ public class WorkerController {
         if (res.get(1) != null){
             return Response.status((int) res.get(2)).entity(res.get(1)).build();
         }
-        return Response.ok().entity(res.get(0)).build();
+        try{
+            res.get(3);
+        } catch (IndexOutOfBoundsException e){
+            return Response.ok().entity(res.get(0)).build();
+        }
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("NextPage", (boolean) res.get(3));
+        List<Object> out = new ArrayList<>();
+        out.add(res.get(0));
+        out.add(map);
+        return Response.ok().entity(out).build();
     }
 }
+
