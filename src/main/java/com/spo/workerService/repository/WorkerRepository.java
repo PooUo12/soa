@@ -7,17 +7,11 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
-import jakarta.ws.rs.BadRequestException;
-import jakarta.ws.rs.NotFoundException;
+
 import jakarta.ws.rs.ext.Provider;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
-import org.hibernate.exception.ConstraintViolationException;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.*;
 
 
@@ -170,11 +164,7 @@ public class WorkerRepository {
             out.add(500);
             return out;
         }
-        if (psqlQuery.getResultList() == null){
-            out.add(0);
-        } else {
-            out.add(psqlQuery.getResultList());
-        }
+        out.add(psqlQuery.getResultList());
         out.add(null);
         out.add(200);
         return out;
@@ -202,11 +192,12 @@ public class WorkerRepository {
     }
 
     private static String createQuery(Map<String, Object> filters) {
-        StringBuilder query = new StringBuilder("select count(*) \n" +
-                "from Worker w\n" +
-                "inner join Person p\n" +
-                "on (w.person = p)\n" +
-                "where ");
+        StringBuilder query = new StringBuilder("""
+                select count(*)\s
+                from Worker w
+                inner join Person p
+                on (w.person = p)
+                where\s""");
         for (Map.Entry<String, Object> entry: filters.entrySet()){
             query.append(entry.getKey());
             query.append(" = ");

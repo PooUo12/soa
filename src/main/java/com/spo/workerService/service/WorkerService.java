@@ -24,7 +24,6 @@ public class WorkerService {
     @Inject
     WorkerParser workerParser;
 
-    private static final Log log = LogFactory.getLog(WorkerRepository.class);
 
     public List<Object> getWorkers(GetRequest getRequest){
         List<Object> out = new ArrayList<>();

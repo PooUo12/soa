@@ -6,9 +6,8 @@ import com.spo.workerService.dto.FindPersonDTO;
 import com.spo.workerService.entity.*;
 import jakarta.enterprise.context.Dependent;
 import lombok.NoArgsConstructor;
-import jakarta.ws.rs.BadRequestException;
 
-import java.sql.Timestamp;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

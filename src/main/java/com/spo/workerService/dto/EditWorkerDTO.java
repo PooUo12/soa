@@ -1,14 +1,9 @@
 package com.spo.workerService.dto;
 
-import com.spo.workerService.entity.Coordinates;
-import com.spo.workerService.entity.Person;
-import com.spo.workerService.entity.Status;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
