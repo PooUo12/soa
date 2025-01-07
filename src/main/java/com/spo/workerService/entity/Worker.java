@@ -23,7 +23,7 @@ public class Worker {
     @Min(1)
     private int id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     @Size(min = 1)
     private String name;
 
@@ -48,7 +48,7 @@ public class Worker {
     private Status status;
 
     @OneToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "person_id", nullable = false)
+    @JoinColumn(name = "person_id", nullable = true)
     private Person person;
 
     public Worker(String name, Coordinates coordinates, long salary, Date startDate, LocalDateTime endDate, Status status, Person person) {

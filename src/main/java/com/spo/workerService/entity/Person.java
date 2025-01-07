@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +20,8 @@ public class Person {
     private int id;
 
     @Column(nullable = true)
-    private String birthday;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date birthday;
 
     @Column(nullable = true)
     private EyeColor eyeColor;
@@ -33,7 +36,7 @@ public class Person {
     @JoinColumn(name="location_id", nullable = false)
     private Location location;
 
-    public Person(String date, EyeColor eyeColor, HairColor hairColor, Country nationality, Location location){
+    public Person(Date date, EyeColor eyeColor, HairColor hairColor, Country nationality, Location location){
         this.birthday = date;
         this.eyeColor = eyeColor;
         this.hairColor = hairColor;

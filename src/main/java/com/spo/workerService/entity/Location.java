@@ -27,7 +27,7 @@ public class Location {
     @Column(nullable = true)
     private Float z;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     @Size(min=1)
     private String name;
 

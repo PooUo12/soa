@@ -37,7 +37,7 @@ public class WorkerService {
         }
         if (filterRes.get(1) != null){
             out.add(null);
-            out.add(sortRes.get(1));
+            out.add(filterRes.get(1));
             out.add(422);
             return out;
         }
@@ -61,12 +61,32 @@ public class WorkerService {
         return workerRepository.save((Worker) res.get(0));
     }
 
-    public List<Object> getWorker(int id){
-        return workerRepository.getWorker(id);
+    public List<Object> getWorker(String workerId){
+        List<Object> out = new ArrayList<>();
+        int int_id;
+        try{
+            int_id = Integer.parseInt(workerId);
+        } catch (NumberFormatException e){
+            out.add(null);
+            out.add("Id should be integer");
+            out.add(422);
+            return out;
+        }
+        return workerRepository.getWorker(int_id);
     }
 
-    public List<Object> deleteWorker(int id){
-        return workerRepository.deleteWorker(id);
+    public List<Object> deleteWorker(String workerId){
+        List<Object> out = new ArrayList<>();
+        int int_id;
+        try{
+            int_id = Integer.parseInt(workerId);
+        } catch (NumberFormatException e){
+            out.add(null);
+            out.add("Id should be integer");
+            out.add(422);
+            return out;
+        }
+        return workerRepository.deleteWorker(int_id);
     }
 
     public List<Object> patchWorker(int id, EditWorkerDTO worker){

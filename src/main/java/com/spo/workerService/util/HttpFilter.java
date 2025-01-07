@@ -21,8 +21,8 @@ public class HttpFilter implements ContainerRequestFilter {
         String url = ctx.getUriInfo().getBaseUri().toString();
         System.out.println(url);
         if (!url.contains("https://")){
+            log.info("Http request rejected");
             ctx.abortWith(Response.status(405).entity("Http not allowed").build());
         }
-        log.info("Http request rejected");
     }
 }

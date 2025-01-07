@@ -2,6 +2,7 @@ package com.spo.workerService.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ public class Coordinates {
     private int id;
 
     @Column(nullable = true)
-    @Max(-106)
+    @Min(-106)
     private Long x;
 
     @Column(nullable = true)
